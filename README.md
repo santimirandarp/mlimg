@@ -20,5 +20,7 @@ Because the content of the page is being dynamically loaded using javascript, a 
 
 So we decided to try Selenium instead as recommended on [StackOverflow](https://stackoverflow.com/questions/17436014/selenium-versus-beautifulsoup-for-web-scraping?rq=1).
 
+But right before trying Selenium someone gave the idea to look which Javascript was running, and we found the API call. With that and BS4 was enough to get 100+ cat photos.
+
 ## 2. Prepare data for ML
 
