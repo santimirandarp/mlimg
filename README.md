@@ -8,19 +8,22 @@ To train ML models we need data. If we don't have it already, there are a few wa
 2. Webscrapping
 
 **Method 1**
-The first method normally needs us having an API-key, and we may or may not have to pay for that. Twitter, Youtube, Spotify, WeatherAPI have free APIs. Picsum has too.
+The first method normally needs us having an API-key. Twitter, Youtube, Spotify, WeatherAPI have free APIs. Picsum has too.
 
-One of the strategies here is to use Picsum API, NodeJS driver to download a set of cat images.
+One of the strategies here is to use Picsum-API NodeJS-driver to download a set of cat images.
 
-The file for this purpose is `fetch.js`.
+The file for this purpose is `JSfetch.js`.
+
 **Method 2**
-Another method is using some python webscraping library. Here we use Beautiful Soup 4 or BS4. The file for this purpose is `fetch.py`.
+Another method is using Python webscraping libraries. We use Beautiful Soup 4 or BS4. 
 
-Because the content of the page is being dynamically loaded using javascript, a simple http request didn't fill the gaps (as only 9 images are on the DOM on start).
+The content of the images-page is being dynamically loaded using JS, hence a simple http request didn't work (only 9 images are on the DOM on start).
 
-So we decided to try Selenium instead as recommended on [StackOverflow](https://stackoverflow.com/questions/17436014/selenium-versus-beautifulsoup-for-web-scraping?rq=1).
+One option is Selenium as recommended on [StackOverflow](https://stackoverflow.com/questions/17436014/selenium-versus-beautifulsoup-for-web-scraping?rq=1). But looking which JS was running we found the API call. With that and BS4 was enough to get 100+ cat photos.
 
-But right before trying Selenium someone gave the idea to look which Javascript was running, and we found the API call. With that and BS4 was enough to get 100+ cat photos.
+We had to research on IMGIX because the images are transformed by the server according to query parameters. IMGIX is an API used under the hood by Picsum. The code is under `Pyfetch-json.py`
+
+Another path is to use **1.**. Part of the script is already written. Exactly the same functions in Python, written in JS should do.
 
 ## 2. Prepare data for ML
 
