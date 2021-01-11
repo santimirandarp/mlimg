@@ -25,5 +25,7 @@ We had to research on IMGIX because the images are transformed by the server acc
 
 Another path is to use **1.**. Part of the script is already written. Exactly the same functions in Python, written in JS should do.
 
+Running `python3 Pyfetch-json.py` downloads cat images for us.
+
 ## 2. Prepare data for ML
 
