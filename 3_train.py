@@ -241,12 +241,12 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations = 100, learning_rate 
     return d
 
 # run
-d = model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations = 2000, learning_rate = 0.001, print_cost = True)
+d = model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations = 100, learning_rate = 0.001, print_cost = True)
 
-# test
 index = 2
-plt.imshow(test_set_x[:,index].reshape((num_px, num_px, 3)))
-print ("y = " + str(test_set_y[0,index]) + ", you predicted that it is a \"" + classes[d["Y_prediction_test"][0,index]].decode("utf-8") +  "\" picture.")
+# test
+#plt.imshow(test_set_x[:,index].reshape((num_px, num_px, 3)))
+print ("y = " + str(test_set_y[0,index]) + ", you predicted that it is a \"" + classes[int(d["Y_prediction_test"][0,index])].decode("utf-8") +  "\" picture.")
 
 
 # Plot learning curve (with costs)
