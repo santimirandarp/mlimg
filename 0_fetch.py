@@ -30,17 +30,24 @@ def queryForImages(queryWord, imagesNum=5, pages=1):
            links.append(results[index]["urls"]["raw"])
     return links
 
-def download_images(links):
-    "links: array of images links"
+def download_images(links, outdir):
+    """
+    links: array of images links
+    outdir: dir where to save images
+    """
     for link in range(len(links)):
         url = links[link]+"&h=200&w=200&fit=clamp"
         response = requests.get(url, stream=True)
         cleanUrl = url.split("/photo")[-1]
         imageName = cleanUrl.split("?")[0].strip("-,.?*")
-        file = open("./images/{}-{}.jpg".format(imageName,link), 'wb')
+        file = open("{}/{}-{}.jpg".format(outdir, imageName,link), 'wb')
         
         response.raw.decode_content = True
         shutil.copyfileobj(response.raw, file)
         del response
+     return "done"
 
-download_images(queryForImages("cat", 100, 5))
+download_images(
+        queryForImages("elephant", 100, 5), 
+        "./images/raw/nocats"
+        )

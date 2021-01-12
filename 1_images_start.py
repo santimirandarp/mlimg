@@ -1,3 +1,8 @@
+"""
+This isnot part of the execution,
+just a script showing how to work
+with images
+"""
 
 # LOAD/SHOW/SAVE images in PYTHON
 # Usin 2 different libs: PIL & CV2

@@ -1,32 +1,49 @@
 import h5py
 import numpy as np
-from glob import glob # import "submodule"
-from PIL import Image
+from glob import glob 
+import cv2
 import matplotlib.pyplot as plt
 
-# img source directory
-src = "images/raw/cats/*"
+"""
+this is part of the execution,
+creates training datasets from the images
+"""
 
-# self explanatory
-outfile = "images/clean/cat.hdf5" 
+src = {
+        "cat":"images/raw/cats/*.jpg", 
+        "elephant":"images/raw/elephants/*.jpg"
+        }
+outfile = "images/clean/train_datasets.hdf5" 
 
+def make_train_dset(srcdir=src, out=outfile, p="cat", n="elephant"):
 
-listOfImages = glob(src)
+    with h5py.File(outfile, "w") as f:
 
-# img loaded as JpegImageFile Object
-oneImage = Image.open(listOfImages[0])
+      p = glob(src[p]); n = glob(src[n])
 
-# open file
-f = h5py.File(outfile, "w")
-data  =  np.array(oneImage) #this is an array 200x200x3
+      # set the arrays of ones and zeros
+      ones = np.ones(len(p), dtype="uint8")
+      zeros = np.zeros(len(n), dtype="uint8")
+      labels = np.concatenate((ones, zeros))
+      counter = 0
+      features = [] 
+      for key in src.keys():
+        for img in glob(src[key]):
+          thisImage = cv2.imread(img) 
+          features.append(thisImage) # narray 200x200x3
 
-# save dataset (ndarray but with more features)
-dset = f.create_dataset("images", data=data) # array 200x200x3
+     # save dataset 
+      f.create_dataset("train_X", data=features) 
+      f.create_dataset("train_Y", data=labels) 
 
-# Check if files can be read from the h5py file
-with h5py.File(outfile, "r") as f:
-    image = f['images']
-    print(image.shape, image.dtype)
-    plt.imshow(image)
-    plt.show()
+def load_datasets(outfile=outfile):
+    with h5py.File(outfile, "r") as f:
+        features = f['train_X']
+        labels = f['train_Y']
+        print(features, labels)
+        #plt.imshow(image)
+        #plt.show()
 
+make_train_dset()
+
+load_datasets()
