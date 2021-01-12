@@ -2,7 +2,6 @@ import h5py
 import numpy as np
 from glob import glob 
 import cv2
-import matplotlib.pyplot as plt
 
 """
 this is part of the execution,
@@ -25,10 +24,10 @@ def make_train_dset(srcdir=src, out=outfile, p="cat", n="elephant"):
       ones = np.ones(len(p), dtype="uint8")
       zeros = np.zeros(len(n), dtype="uint8")
       labels = np.concatenate((ones, zeros))
-      counter = 0
       features = [] 
       for key in src.keys():
         for img in glob(src[key]):
+          print(img)
           thisImage = cv2.imread(img) 
           features.append(thisImage) # narray 200x200x3
 
@@ -41,9 +40,9 @@ def load_datasets(outfile=outfile):
         features = f['train_X']
         labels = f['train_Y']
         print(features, labels)
-        #plt.imshow(image)
-        #plt.show()
-
+        cv2.imshow("image", features[200])
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 make_train_dset()
 
 load_datasets()
