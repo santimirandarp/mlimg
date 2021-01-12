@@ -1,4 +1,6 @@
-# Binary Detector
+**tl;dr** clone the repo and run `python3 3_train.py`
+
+# Binary Classifier
 
 As an excuse to learn ML we created this simple document describing a few ideas and basic steps.
 
@@ -39,3 +41,8 @@ This step requires creating hfd5 files (h5) from the images. So we can have the 
 There are many ways to deal with images in python, a small introduction is under `1_images_start.py`. This is not part of the procedure, but it's worth to take a look.
 
 The next script to execute is `2_imgToH5.py`. This uses CV2 python image library, and writes features (images) and labels to a h5 file.
+
+## 3. ML model
+This was almost blindly copied from the ML course
+
+
