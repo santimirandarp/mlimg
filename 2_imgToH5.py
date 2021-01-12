@@ -92,16 +92,6 @@ def make_train_dset(src=src, out=outfile, p="cat", n="elephant"):
       f.create_dataset("train_Y", data=Pointers["train"]["labels"]) 
       f.create_dataset("test_X", data=features_test) 
       f.create_dataset("test_Y", data=Pointers["test"]["labels"]) 
-
-def load_datasets(outfile=outfile):
-    with h5py.File(outfile, "r") as f:
-        features = f['train_X']
-        labels = f['train_Y']
-        print(features, labels)
-        cv2.imshow("image", features[200])
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+      f.create_dataset("classes", data=[n, p])
 
 make_train_dset()
-
-load_datasets()
