@@ -94,4 +94,4 @@ def make_all_dset(src=src, out=outfile, one="cat", zero="elephant"):
       f.create_dataset("test_Y", data=Pointers["test"]["labels"]) 
       f.create_dataset("classes", data=[zero, one])
 
-make_all_dset()
+make_train_dset()

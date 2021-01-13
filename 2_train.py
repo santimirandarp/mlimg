@@ -1,23 +1,21 @@
 import numpy as np 
 import matplotlib.pyplot as plt # plot images from RGB values
-#import scipy # not sure
 from PIL import Image # load images
-#from scipy import ndimage
 from load_datasets import load_datasets
 
 # load all datasets
 train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes = load_datasets()
 
 
-# extract images
-m_train = train_set_x_orig.shape[0]
-m_test = test_set_x_orig.shape[0]
-num_px = train_set_x_orig.shape[1]
+m_train = train_set_x_orig.shape[0] # N training samples
+m_test = test_set_x_orig.shape[0] # N test samples
+num_px = train_set_x_orig.shape[1] # pixels (squared images)
 
+# matrix where each image is a column
+train_set_x_flatten = train_set_x_orig.reshape(m_train,-1).T
+test_set_x_flatten = test_set_x_orig.reshape(m_test,-1).T
 
-train_set_x_flatten = train_set_x_orig.reshape(train_set_x_orig.shape[0],-1).T
-test_set_x_flatten = test_set_x_orig.reshape(test_set_x_orig.shape[0],-1).T
-
+# normalize to 0-1 range.
 train_set_x = train_set_x_flatten/255.
 test_set_x = test_set_x_flatten/255.
 
@@ -75,14 +73,11 @@ def propagate(w, b, X, Y):
     dw -- gradient of the loss with respect to w, thus same shape as w
     db -- gradient of the loss with respect to b, thus same shape as b
     
-    Tips:
-    - Write your code step by step for the propagation. np.log(), np.dot()
     """
     
-    m = X.shape[1] # 209 
+    m = X.shape[1] 
     
     # FORWARD PROPAGATION (FROM X TO COST)
-    # w is a column. We need to traspose it
     A = sigmoid(np.dot(w.T, X) + b) # compute activation / sigmoid , row
     cost = -(1/m)*np.sum(Y*np.log(A) + (1-Y)*np.log(1-A)) # compute cost
     ### END CODE HERE ###

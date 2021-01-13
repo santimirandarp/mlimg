@@ -48,7 +48,5 @@ def download_images(links, outdir, IMGIX="&h=200&w=200&fit=clamp"):
         del response
      return 1
 
-download_images(
-        queryForImages("elephant", 100, 5), 
-        "./images/raw/elephant"
-        )
+download_images( queryForImages("elephant", 100, 5), 
+                "./images/raw/nocats")
