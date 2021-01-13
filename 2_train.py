@@ -1,8 +1,7 @@
-import numpy as np # to deal with linear algebra structures
-import matplotlib.pyplot as plt # to plot the images array of RGB values
-import h5py # to handle h5 binary files
+import numpy as np 
+import matplotlib.pyplot as plt # plot images from RGB values
 #import scipy # not sure
-from PIL import Image
+from PIL import Image # load images
 #from scipy import ndimage
 from load_datasets import load_datasets
 

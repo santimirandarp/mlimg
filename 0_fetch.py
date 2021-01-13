@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup # webscraping library
 
 import requests
 import urllib.request
@@ -6,13 +6,13 @@ import shutil
 
 def queryForImages(queryWord, imagesNum=5, pages=1):
     """
-    collects imagesNum*pages images. (no other way possible).
+    collects imagesNum*pages images. (only way possible).
 
-    queryWord: example "cat", a string
-    imagesNum: number of images, a number.
-    pages: number of pages, a number.
+    queryWord: example "cat". String
+    imagesNum: number of images. Number.
+    pages: number of pages. Number.
 
-    returns urls of images
+    array of images' urls 
     """
     baseUrl="https://unsplash.com"
     route = "/napi/search/photos"
@@ -21,33 +21,34 @@ def queryForImages(queryWord, imagesNum=5, pages=1):
     for page in range(pages):
         query = "?query={}&per_page={}&page={}&xp=feedback-loop-v2:control".format(queryWord, imagesNum, page)
         url = baseUrl+route+query 
-        print("page", page)
-        print("url", url)
+        print("requesting:", " ", url)
         response = requests.get(url).json() 
-        # server responds to an API call with JSON data
-        results = response["results"] # access json data
+        # server responds w/ JSON data
+        results = response["results"] # access object
         for index in range(len(results)):
            links.append(results[index]["urls"]["raw"])
     return links
 
-def download_images(links, outdir):
+def download_images(links, outdir, IMGIX="&h=200&w=200&fit=clamp"):
     """
     links: array of images links
     outdir: dir where to save images
+    IMGIX: image-processing query string.
     """
     for link in range(len(links)):
-        url = links[link]+"&h=200&w=200&fit=clamp"
-        response = requests.get(url, stream=True)
+        url = links[link]+IMGIX
+        # set up
         cleanUrl = url.split("/photo")[-1]
         imageName = cleanUrl.split("?")[0].strip("-,.?*")
-        file = open("{}/{}-{}.jpg".format(outdir, imageName,link), 'wb')
-        
+        file = open("{}/{}-{}.jpg".format(outdir, imageName,link), 'wb') # below write binary data "wb" (jpg) to file.
+
+        response = requests.get(url, stream=True)
         response.raw.decode_content = True
         shutil.copyfileobj(response.raw, file)
         del response
-     return "done"
+     return 1
 
 download_images(
         queryForImages("elephant", 100, 5), 
-        "./images/raw/nocats"
+        "./images/raw/elephant"
         )

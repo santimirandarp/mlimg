@@ -1,4 +1,4 @@
-**tl;dr** clone the repo and run `python3 3_train.py`
+**tl;dr** clone the repo and run `python3 2_train.py`
 
 # Binary Classifier
 
