@@ -92,6 +92,6 @@ def make_all_dset(src=src, out=outfile, one="cat", zero="elephant"):
       f.create_dataset("train_Y", data=Pointers["train"]["labels"]) 
       f.create_dataset("test_X", data=features_test) 
       f.create_dataset("test_Y", data=Pointers["test"]["labels"]) 
-      f.create_dataset("classes", data=[zero, one])
+      f.create_dataset("classes", data=np.array([zero, one], dtype='S')) 
 
 make_train_dset()

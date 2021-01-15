@@ -1,5 +1,7 @@
 **tl;dr** clone the repo and run `python3 2_train.py`
 
+Find a (live version on repl.it)[https://repl.it/@misterybodon/mlimg], pressing **Run** to play it.
+
 # Binary Classifier
 
 As an excuse to learn ML we created this simple document describing a few ideas and basic steps.

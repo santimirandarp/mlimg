@@ -11,7 +11,12 @@ m_train = train_set_x_orig.shape[0] # N training samples
 m_test = test_set_x_orig.shape[0] # N test samples
 num_px = train_set_x_orig.shape[1] # pixels (squared images)
 
-# matrix where each image is a column
+print("The number of training samples is", m_train)
+print("The number of test samples is", m_test)
+print("The number of training samples is", num_px)
+
+# It's simpler if we reshape the matrix of images
+# to a vector
 train_set_x_flatten = train_set_x_orig.reshape(m_train,-1).T
 test_set_x_flatten = test_set_x_orig.reshape(m_test,-1).T
 
@@ -235,7 +240,7 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations = 100, learning_rate 
     return d
 
 # run
-d = model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations = 100, learning_rate = 0.001, print_cost = True)
+d = model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations = 500, learning_rate = 0.010, print_cost = True)
 
 index = 2
 # test
