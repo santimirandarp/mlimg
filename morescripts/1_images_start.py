@@ -1,41 +1,49 @@
 """
-This isnot part of the execution,
-just a script showing how to work
-with images
+1. Load Image File
+2. Get the RGB representation
+3. Feed to a "show" function
 """
-
-# LOAD/SHOW/SAVE images in PYTHON
-# Usin 2 different libs: PIL & CV2
-
-#FIRST using CV2
-import cv2
-#cv2 Docs https://tinyurl.com/y5ejrtmg
+from random import randint
 from glob import glob
 
-catsNameList = glob("images/raw/cats/*")
-# images should be stored here ^^^^
+#setup
+pathToFiles = "../images/raw/cats/*"
+cats = glob(pathToFiles)
+One = cats[randint(0, len(cats)-1)] #random cat
 
-# let's use only one
-# you can always loop
-One = catsNameList[0]
+# Using convert to (cv2)
+import cv2
+#cv2 Docs https://tinyurl.com/y5ejrtmg
 catImg = cv2.imread(One, 1)
-cv2.imshow(name, catImg)
+cv2.imshow("random cat", catImg)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
-# Using matplot lib + cv2
+# Playing a bit
+color = cv2.imread(One, 1) #returns narray
+grey = cv2.imread(One, 0)
+red = cv2.imread(One, 1)
+red[:,:,0:2] = 0 #set green and blue to zero
+for cat in [color, grey, red]:
+    cv2.imshow("random cat", cat)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
+# Show using matplot lib
 import matplotlib.pyplot as plt
-catImg = cv2.imread(One, 1)
-plt.imshow(catImg)
-plt.show()
+plt.imshow(color) #show
+plt.show() #execute
 
 
-# SECOND using PIL 
-from PIL as Image
-catImg = Image.open(One) 
-catImg.show()
+# Using PIL (python image library)
+from PIL import Image
 
-#using PIL + matplotlib
-catImg = Image.open(One) 
-plt.imshow(catImg)
+catImg = Image.open(One) #load
+catImg.show() #show
+
+# Show using patplotlib
+plt.imshow(catImg) #show
 plt.show()
 
 
