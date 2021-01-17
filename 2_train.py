@@ -1,11 +1,13 @@
 import numpy as np 
 import matplotlib.pyplot as plt # plot images from RGB values
 from PIL import Image # load images
-from load_datasets import load_datasets
+from ds import load_ds
 
 # load all datasets
-train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes = load_datasets()
+train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes = load_ds()
+print(train_set_x_orig, train_set_y)
 
+exit()
 
 m_train = train_set_x_orig.shape[0] # N training samples
 m_test = test_set_x_orig.shape[0] # N test samples

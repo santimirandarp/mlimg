@@ -26,6 +26,7 @@ def queryForImages(queryWord, imagesNum=5, pages=1):
         # server responds w/ JSON data
         results = response["results"] # access object
         for index in range(len(results)):
+           # append mutates links
            links.append(results[index]["urls"]["raw"])
     return links
 

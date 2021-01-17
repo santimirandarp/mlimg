@@ -24,9 +24,9 @@ def splitAt(imgs):
 
 def zeros_or_ones(arr, ones=True):
     if(ones==True):
-        return np.ones(len(arr), dtype="uint8")
+        return np.ones(len(arr), dtype="int8")
     else:
-        return np.zeros(len(arr), dtype="uint8")
+        return np.zeros(len(arr), dtype="int8")
 
 def split_data(src=src):
   """ 
@@ -54,8 +54,8 @@ def split_data(src=src):
   zeros_test = zeros_or_ones(zero_test, False)
   
   # create labels arrays
-  features_train = np.concatenate((ones_train, zeros_train))
-  features_test = np.concatenate((ones_test, zeros_test))
+  features_train = np.concatenate((one_train, zero_train))
+  features_test = np.concatenate((one_test, zero_test))
   labels_train = np.concatenate((ones_train, zeros_train))
   labels_test = np.concatenate((ones_test, zeros_test))
   return {
@@ -94,4 +94,4 @@ def make_all_dset(src=src, out=outfile, one="cat", zero="elephant"):
       f.create_dataset("test_Y", data=Pointers["test"]["labels"]) 
       f.create_dataset("classes", data=np.array([zero, one], dtype='S')) 
 
-make_train_dset()
+make_all_dset()
