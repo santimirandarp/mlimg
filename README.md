@@ -7,7 +7,7 @@ Set of scripts to:
 2. Train the model
 3. Make predictions
 
-## 1. Get the data
+### 1. Get the data
 To train ML/DL models we need data. If we don't have it already, there are a few ways to get it:
 1. Using an API
 2. Webscrapping
@@ -27,10 +27,10 @@ Picsum images are transformed by the server according to query parameters. IMGIX
 
 Code is under `0_fetch.py`
 
-## 2. Prepare data for ML
+### 2. Prepare data for ML
 This step requires creating hfd5 files (h5) storing images in binary format. It's handy because features, labels and classes are all stored and loaded-from the binary file.
 
 The next script to execute is `1_imgToH5.py`. This uses CV2 python image library, and writes features (images) and labels to a h5 file.
 
-## 3. ML model
+### 3. ML model
 Code for training was blindly copied from the Andrew Ng course. The script is `2_train.py`.
